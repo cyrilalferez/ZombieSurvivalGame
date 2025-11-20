@@ -1,84 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using ZombieSurvivalGame.Domain;
+﻿using ZombieSurvivalGame.Data;
 using ZombieSurvivalGame.Model;
 using ZombieSurvivalGame.Utils;
-using static ZombieSurvivalGame.Domain.CharacterParts;
 
 namespace ZombieSurvivalGame.Services
 {
     public class GameService
     {
-        public void Start()
+        private CharacterService characterService;
+        private CharacterRepository characterRepository;
+        private Character character;
+        private ConsoleHelper consoleHelper;
+
+        public GameService()
         {
-            GetCharacterFeatures();
-
-            // Create Character
-
-            // Save Character
+            characterService = new CharacterService();
+            characterRepository = new CharacterRepository();
+            consoleHelper = new ConsoleHelper();
         }
 
-        public void GetCharacterFeatures()
+        public void Start()
         {
-            ConsoleHelper consoleHelper = new ConsoleHelper();
-            Console.Write("Enter username: ");
-            string username = Console.ReadLine();
-
-            ConsoleHelper.CharacterRoleOptions();
-            string role = CharacterParts.RoleType[Validator.GetValidNumber("Choose your role: ", 1, 2) - 1];
-
-            ConsoleHelper.AgeOptions();
-            int ageChoice = Validator.GetValidNumber("Enter your age: ", 1, 4);
-
-
-            consoleHelper.EyeTypeOptions();
-            string eyeType = CharacterParts.EyeTypes[Validator.GetValidNumber("Choose your eye type: ", 1, CharacterParts.EyeTypes.Length) - 1];
-
-            consoleHelper.NoseTypeOptions();
-            string noseType = CharacterParts.NoseTypes[Validator.GetValidNumber("Choose your nose type: ", 1, CharacterParts.NoseTypes.Length) - 1];
-
-            consoleHelper.MouthTypeOptions();
-            string mouthType = CharacterParts.MouthTypes[Validator.GetValidNumber("Choose your mouth type: ", 1, CharacterParts.MouthTypes.Length) - 1];
-
-            // has hair part
-
-            consoleHelper.BodyTypeOptions(role);
-            string bodyType = "";
-            if (role.Equals("Human"))
+            bool start = true;
+            while (start)
             {
-                bodyType = CharacterParts.BodyTypeHuman[Validator.GetValidNumber("Choose your body type: ", 1, CharacterParts.BodyTypeHuman.Length) - 1];
-            }
-            else
-            {
-                bodyType = CharacterParts.BodyTypeZombie[Validator.GetValidNumber("Choose your body type: ", 1, CharacterParts.BodyTypeZombie.Length) - 1];
-            }
+                // INTRO
+                int menuChoice = GetMenuChoice("Select an option: ", 0, 3);
+                switch (menuChoice)
+                {
+                    case 0:
+                        // Exit
+                        start = false;
+                        break;
+                    case 1:
+                        // New game logic here
+                        // Create character
+                        character = characterService.GetCharacterFeatures();
 
-            consoleHelper.SkinColorOptions(role);
-            string skinColor = "";
-            if (role.Equals("Human"))
-            {
-                skinColor = CharacterParts.SkinColorHuman[Validator.GetValidNumber("Choose your skin color: ", 1, CharacterParts.SkinColorHuman.Length) - 1];
-            }
-            else
-            {
-                skinColor = CharacterParts.SkinColorZombie[Validator.GetValidNumber("Choose your skin color: ", 1, CharacterParts.SkinColorZombie.Length) - 1];
-            }
+                        // Save Character to DB
+                        characterRepository.SaveCharacter(character);
 
-            Console.WriteLine("Success");
+                        character.DisplayCharacterInfo();
+                        return;
+                    case 2:
+                        Console.WriteLine("Campaign Mode selected.");
+                        // Campaign mode logic here
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("HOLD 'SPACE' TO SPEED UP");
+                        Console.ResetColor();
 
-            if (role.Equals("Human"))
-            {
-                Console.WriteLine("Human type");
+                        ConsoleHelper.TypeEffect("Suddenly, a strange virus infects people in the city, transforming them into zombies, fast, aggressive, and mutated, as though a nightmare manifested itself in reality. You are a messenger that is accustomed to live in a hurry and is familiar with all shortcuts, tunnels, and shadows.");
+                        ConsoleHelper.TypeEffect("As communication towers are collapsing one after another, you have to provide a critical antiviral sample before the military will decide to firebomb the whole city to put the outbreak in check.\r\n");
+                        ConsoleHelper.TypeEffect("Squeezing through deserted streets, broken houses and underground tunnels, you are not only avoiding various forms of infection, you are also dealing with survivors who are now losing hope.");
+                        ConsoleHelper.TypeEffect("Some of them come with you, and each has his talents and tragic histories, and in addition to all those, fears and desperation which are going to divide your camp.\r\n");
+                        ConsoleHelper.TypeEffect("As you get further in you get more tragedies: teammates you have to leave behind to allow others to survive, rescue missions that go terribly astray, and tough decisions that haunt your conscience.");
+                        ConsoleHelper.TypeEffect("With all the sacrifice, weariness and uncertainty, you start discovering the real cause of the outbreak- and the staggering fact that you were the very one the virus was targeting at the dawn of time.\r\n");
+                        break;
+                    case 3:
+                        ConsoleHelper.TypeEffect("Credits selected.");
+                        // Display credits logic here
+                        return;
+                }
             }
-            else
+            ConsoleHelper.TypeEffect("Thanks for using this program!");
 
-            {
-                Console.WriteLine("Not human.");
-            }
+        }
+
+        private int GetMenuChoice(string prompt, int min, int max)
+        {
+            consoleHelper.MenuOptions();
+            return Validator.GetValidNumber(prompt, min, max);
         }
     }
 }

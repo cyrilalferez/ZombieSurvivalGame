@@ -1,32 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ZombieSurvivalGame.Utils
+﻿namespace ZombieSurvivalGame.Utils
 {
-    public class Validator
+    public static class Validator
     {
+        public static string GetValidInput(string prompt)
+        {
+            string input = "";
+            while (true)
+            {
+                Console.Write(prompt);
+                input = Console.ReadLine() ?? "";
+                if (!string.IsNullOrEmpty(input))
+                {
+                    return input;
+                }
+                else
+                {
+                    Console.WriteLine("Input cannot be empty. Please try again.");
+                }
+            }
+        }
         public static int GetValidNumber(string prompt, int min, int max)
         {
             int choice = -1;
 
-            while(true)
+            while (true)
             {
-                Console.Write(prompt);
+                string input = GetValidInput(prompt);
 
-                string input = Console.ReadLine() ?? "";
-
-                if(string.IsNullOrEmpty(input))
+                if (int.TryParse(input, out choice))
                 {
-                    Console.WriteLine("Input cannot be empty. Please enter a valid age.");
-                    continue;
-                }
-
-                if(int.TryParse(input, out choice))
-                {
-                    if(choice >= min && choice <= max)
+                    if (choice >= min && choice <= max)
                     {
                         return choice;
                     }
@@ -46,8 +49,7 @@ namespace ZombieSurvivalGame.Utils
         {
             while (true)
             {
-                Console.Write(prompt);
-                string input = (Console.ReadLine() ?? "").Trim().ToLower();
+                string input = (GetValidInput(prompt).Trim().ToLower());
 
                 if (input == "y" || input == "yes" || input == "true")
                 {

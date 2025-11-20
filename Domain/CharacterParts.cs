@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ZombieSurvivalGame.Domain
+﻿namespace ZombieSurvivalGame.Domain
 {
     public class CharacterParts
     {
@@ -44,6 +36,8 @@ namespace ZombieSurvivalGame.Domain
             "Smile"
         };
 
+
+        // hairstyle
         public readonly static string[] HairStyleHuman =
         {
             "Straight",
@@ -96,30 +90,69 @@ namespace ZombieSurvivalGame.Domain
         };
 
 
-        public enum PostureType
+        public readonly static string[] PostureTypeHuman =
         {
-            Upright,
-            Slouched,
-            LeaningForward,
-            Hunched,
-            Defensive,
-            Casual,
-            Alert
-        }
+            "Upright",
+            "Slouched",
+            "LeaningForward",
+            "Hunched",
+            "Defensive",
+        };
 
-        public enum ShirtType
+        public readonly static string[] PostureTypeZombie =
         {
-            TShirt,
-            Hoodie,
-            LongSleeve,
-            Ripped,
-            Military,
+            "Slouched",
+            "Leaning Forward",
+            "Hunched",
+            "Casual",
+            "Alert",
+        };
 
-            // Zombie
-            Torn,
-            Dirty,
-            BloodStained
-        }
+        public readonly static string[] ShirtTypeHuman =
+        {
+            "TShirt",
+            "Hoodie",
+            "LongSleeve",
+            "Ripped",
+            "Military",
+        };
+
+        public readonly static string[] ShirtTypeZombie =
+        {
+            "Torn",
+            "Dirty",
+            "BloodStained",
+        };
+
+        public readonly static string[] PantsTypeHuman =
+        {
+            "Jeans",
+            "Cargo",
+            "Shorts",
+            "Tactical",
+            "Ripped"
+        };
+        public readonly static string[] PantsTypeZombie =
+        {
+            "Dirty",
+            "Torn",
+            "Loose",
+            "Decayed"
+        };
+
+        public readonly static string[] WeaponTypeHuman =
+        {
+            "Machete",
+            "Axe",
+            "Shotgun",
+            "Handgun",
+            "BaseballBat"
+        };
+        public readonly static string[] WeaponTypeZombie =
+        {
+        "Bite",
+        "Claws"
+        };
 
         public enum PantsType
         {

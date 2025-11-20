@@ -1,13 +1,8 @@
 ﻿using Microsoft.Data.Sqlite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ZombieSurvivalGame.Config
 {
-    internal class SqliteDatabase : IDatabase
+    public class SqliteDatabase : IDatabase
     {
         public SqliteConnection CreateConnection()
         {
@@ -15,13 +10,13 @@ namespace ZombieSurvivalGame.Config
         }
         public void Initialize()
         {
-			try
-			{
-                using(var conn = CreateConnection())
+            try
+            {
+                using (var conn = CreateConnection())
                 {
                     conn.Open();
 
-                    using(var cmd = conn.CreateCommand())
+                    using (var cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = @"
                             CREATE TABLE IF NOT EXISTS Characters (
@@ -45,11 +40,11 @@ namespace ZombieSurvivalGame.Config
                         cmd.ExecuteNonQuery();
                     }
                 }
-			}
-			catch (Exception e)
-			{
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine($"[DB ERROR] Initialization failed: {e.Message}");
-			}
+            }
         }
     }
 }

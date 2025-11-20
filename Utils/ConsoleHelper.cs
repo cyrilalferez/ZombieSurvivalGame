@@ -1,22 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using ZombieSurvivalGame.Domain;
-using ZombieSurvivalGame.Model;
+﻿using ZombieSurvivalGame.Domain;
 
 namespace ZombieSurvivalGame.Utils
 {
     public class ConsoleHelper
     {
-        // Removed dependence on an internal Character instance to avoid null refs.
-
         public ConsoleHelper()
         {
+        }
+
+        public static void TypeEffect(string message)
+        {
+            foreach (char c in message)
+            {
+                Console.Write(c);
+
+                int delay = (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Spacebar) ? 0 : 30;
+
+                Thread.Sleep(delay);
+            }
+
+            Console.WriteLine();
+        }
+
+
+        public void MenuOptions()
+        {
+            Console.Clear();
+            Console.WriteLine("0. Exit");
+            Console.WriteLine("1. Load Game");
+            Console.WriteLine("2. Campaign Mode");
+            Console.WriteLine("3. Credits");
         }
 
         public static void AgeOptions()
@@ -57,6 +70,12 @@ namespace ZombieSurvivalGame.Utils
             {
                 Console.WriteLine($"{i + 1}. {CharacterParts.MouthTypes[i]}");
             }
+        }
+
+        public void HasHairOptions()
+        {
+            Console.WriteLine("1. Yes");
+            Console.WriteLine("2. No");
         }
 
         // Use role parameter instead of reading a possibly-null character
@@ -113,6 +132,79 @@ namespace ZombieSurvivalGame.Utils
                 }
             }
         }
+
+        public void PostureOptions(string role)
+        {
+            if (role.Equals("Human", StringComparison.OrdinalIgnoreCase))
+            {
+                for (int i = 0; i < CharacterParts.PostureTypeHuman.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {CharacterParts.PostureTypeHuman[i]}");
+                }
+            }
+            else
+            {
+                for (int i = 0; i < CharacterParts.PostureTypeZombie.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {CharacterParts.PostureTypeZombie[i]}");
+                }
+            }
+        }
+
+        public void ShirtTypeOptions(string role)
+        {
+            if (role.Equals("Human", StringComparison.OrdinalIgnoreCase))
+            {
+                for (int i = 0; i < CharacterParts.ShirtTypeHuman.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {CharacterParts.ShirtTypeHuman[i]}");
+                }
+            }
+            else
+            {
+                for (int i = 0; i < CharacterParts.ShirtTypeZombie.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {CharacterParts.ShirtTypeZombie[i]}");
+                }
+            }
+        }
+
+        public void PantsTypeOptions(string role)
+        {
+            if (role.Equals("Human"))
+            {
+                for (int i = 0; i < CharacterParts.PantsTypeHuman.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {CharacterParts.PantsTypeHuman[i]}");
+                }
+            }
+            else
+            {
+                for (int i = 0; i < CharacterParts.PantsTypeZombie.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {CharacterParts.PantsTypeZombie[i]}");
+                }
+            }
+        }
+
+        public void WeaponTypeOptions(string role)
+        {
+            if (role.Equals("Human"))
+            {
+                for (int i = 0; i < CharacterParts.WeaponTypeHuman.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {CharacterParts.WeaponTypeHuman[i]}");
+                }
+            }
+            else
+            {
+                for (int i = 0; i < CharacterParts.WeaponTypeZombie.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {CharacterParts.WeaponTypeZombie[i]}");
+                }
+            }
+        }
+
     }
 }
 
