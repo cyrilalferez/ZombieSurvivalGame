@@ -25,6 +25,9 @@ namespace ZombieSurvivalGame.Utils
         public void MenuOptions()
         {
             Console.Clear();
+            Console.WriteLine("╔════════════════════════════════════════╗");
+            Console.WriteLine("║                MAIN MENU               ║");
+            Console.WriteLine("╚════════════════════════════════════════╝\n");
             Console.WriteLine("0. Exit");
             Console.WriteLine("1. New Game");
             Console.WriteLine("2. Load Game");

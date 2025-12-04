@@ -35,6 +35,11 @@ namespace ZombieSurvivalGame.Services
                     case 1:
                         // New game logic here
                         // Create character
+                        Console.Clear();
+                        Console.WriteLine("╔════════════════════════════════════════╗");
+                        Console.WriteLine("║          CREATE YOUR CHARACTER         ║");
+                        Console.WriteLine("╚════════════════════════════════════════╝\n");
+
                         character = characterService.GetCharacterFeatures();
 
                         // Save Character to DB
@@ -43,7 +48,7 @@ namespace ZombieSurvivalGame.Services
                         character.DisplayCharacterInfo();
 
                         Console.WriteLine("\n╔════════════════════════════════════════╗");
-                        Console.WriteLine("║             CHARACTER ACTIONS            ║");
+                        Console.WriteLine("║             CHARACTER ACTIONS          ║");
                         Console.WriteLine("╚════════════════════════════════════════╝\n");
                         // Demonstrate character actions
                         character.Attack();
@@ -56,7 +61,10 @@ namespace ZombieSurvivalGame.Services
                         break;
                     case 2:
                         // Load game logic here
-                        ConsoleHelper.TypeEffect("Load Game selected.");
+                        Console.Clear();
+                        Console.WriteLine("╔════════════════════════════════════════╗");
+                        Console.WriteLine("║           LOAD YOUR CHARACTER          ║");
+                        Console.WriteLine("╚════════════════════════════════════════╝\n");
                         List<Character> characters = characterRepository.LoadCharacters();
 
                         if (characters.Count == 0)
@@ -94,6 +102,10 @@ namespace ZombieSurvivalGame.Services
                         break;
                     case 3:
                         // Campaign mode logic here
+                        Console.Clear();
+                        Console.WriteLine("╔════════════════════════════════════╗");
+                        Console.WriteLine("║         CAMPAIGN MODE STORY        ║");
+                        Console.WriteLine("╚════════════════════════════════════╝\n");
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("HOLD 'SPACE' TO SPEED UP");
                         Console.ResetColor();
@@ -105,11 +117,16 @@ namespace ZombieSurvivalGame.Services
                         ConsoleHelper.TypeEffect("As you get further in you get more tragedies: teammates you have to leave behind to allow others to survive, rescue missions that go terribly astray, and tough decisions that haunt your conscience.");
                         ConsoleHelper.TypeEffect("With all the sacrifice, weariness and uncertainty, you start discovering the real cause of the outbreak- and the staggering fact that you were the very one the virus was targeting at the dawn of time.\r\n");
 
+                        Thread.Sleep(2000);
                         ConsoleHelper.TypeEffect("Press any key to continue...");
                         Console.ReadKey();
                         break;
                     case 4:
                         // Credits logic here
+                        Console.Clear();
+                        Console.WriteLine("╔════════════════════════════════════╗");
+                        Console.WriteLine("║              CREDITS               ║");
+                        Console.WriteLine("╚════════════════════════════════════╝\n");
                         Console.ForegroundColor = ConsoleColor.Red;
                         ConsoleHelper.TypeEffect("Czire Haber");
                         Console.ResetColor();

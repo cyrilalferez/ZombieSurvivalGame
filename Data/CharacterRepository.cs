@@ -7,7 +7,6 @@ namespace ZombieSurvivalGame.Data
     internal class CharacterRepository
     {
         // save character
-        // NOTE: Update the Character table
         public void SaveCharacter(Character character)
         {
             try
@@ -62,7 +61,6 @@ namespace ZombieSurvivalGame.Data
         }
 
         // load character
-        // NOTE: Update the Character table
         public List<Character> LoadCharacters()
         {
             List<Character> characters = new List<Character>();

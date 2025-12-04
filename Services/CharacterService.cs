@@ -11,9 +11,6 @@ namespace ZombieSurvivalGame.Services
         public Character GetCharacterFeatures()
         {
             ConsoleHelper consoleHelper = new ConsoleHelper();
-            Console.Clear();
-
-            Console.WriteLine("========== CHARACTER CREATION ==========");
 
             // username
             string username = Validator.GetValidUsername("Enter username: ");
